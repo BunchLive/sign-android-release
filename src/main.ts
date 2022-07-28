@@ -25,8 +25,8 @@ async function run() {
       // 3. Now that we have a release files, decode and save the signing key
       console.log(`Release dir: ${releaseDir}`)
       const signingKey = path.join(releaseDir, 'signingKey.jks');
-      console.log(`Signing key: ${releaseDir}`)
 
+      console.log(`Signing key: ${signingKey}`)
       fs.writeFileSync(signingKey, signingKeyBase64, 'base64');
 
       // 4. Now zipalign and sign each one of the the release files
@@ -72,7 +72,7 @@ async function run() {
     if (error instanceof Error) {
       core.setFailed(error.message);
     }
-    core.setFailed("error");
+    core.setFailed(`${error}`);
   }
 }
 
