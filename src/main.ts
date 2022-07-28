@@ -23,7 +23,10 @@ async function run() {
     const releaseFiles = io.findReleaseFiles(releaseDir);
     if (releaseFiles !== undefined && releaseFiles.length !== 0) {
       // 3. Now that we have a release files, decode and save the signing key
+      console.log(`Release dir: ${releaseDir}`)
       const signingKey = path.join(releaseDir, 'signingKey.jks');
+      console.log(`Signing key: ${releaseDir}`)
+
       fs.writeFileSync(signingKey, signingKeyBase64, 'base64');
 
       // 4. Now zipalign and sign each one of the the release files
