@@ -32,13 +32,20 @@ async function run() {
       fs.writeFileSync(signingKey, signingKeyBase64, 'base64');
 
       console.log("After fs.writeFile");
-      
+
       // 4. Now zipalign and sign each one of the the release files
       let signedReleaseFiles:string[] = [];
       let index = 0;
+
+      console.log(`releaseFiles: ${releaseFiles}`);
+      
       for (let releaseFile of releaseFiles) {
         core.debug(`Found release to sign: ${releaseFile.name}`);
+        console.log(`Found release to sign: ${releaseFile.name}`);
+
+        console.log(`filePath: ${releaseDir} || ${releaseFile.name}`);
         const releaseFilePath = path.join(releaseDir, releaseFile.name);
+        
         let signedReleaseFile = '';
         if (releaseFile.name.endsWith('.apk')) {
           signedReleaseFile = await signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword);
