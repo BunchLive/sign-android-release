@@ -27,8 +27,12 @@ async function run() {
       const signingKey = path.join(releaseDir, 'signingKey.jks');
 
       console.log(`Signing key: ${signingKey}`)
+      console.log(`Signing key64: ${signingKeyBase64}`)
+
       fs.writeFileSync(signingKey, signingKeyBase64, 'base64');
 
+      console.log("After fs.writeFile");
+      
       // 4. Now zipalign and sign each one of the the release files
       let signedReleaseFiles:string[] = [];
       let index = 0;
